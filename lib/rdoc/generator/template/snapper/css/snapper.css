@@ -1,10 +1,55 @@
 @font-face {
     font-family: "Inter";
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     src: local("Inter Regular"),
         local("Inter-Regular"),
         url("../fonts/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Inter Black"),
+        local("Inter-Black"),
+        url("../fonts/Inter-Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Inter Bold"),
+        local("Inter-Bold"),
+        url("../fonts/Inter-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    src: local("Inter ExtraBold"),
+        local("Inter-ExtraBold"),
+        url("../fonts/Inter-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 200;
+    src: local("Inter ExtraLight"),
+        local("Inter-ExtraLight"),
+        url("../fonts/Inter-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Inter Light"),
+        local("Inter-Light"),
+        url("../fonts/Inter-Light.ttf") format("truetype");
 }
 
 :root {
@@ -15,6 +60,8 @@
 
     --font-sans: Inter, system-ui, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     --font-mono: Consolas, 'Lucida Console', Menlo, Monaco, Cousine, 'Courier New', Courier, monospace;
+
+    --red: rgb(255, 80, 80);
 }
 
 html {
@@ -59,7 +106,7 @@ h4 {
 }
 
 a {
-    color: rgb(255, 80, 80);
+    color: var(--red);
     text-underline-offset: 2px;
 }
 
@@ -80,10 +127,10 @@ footer {
     transition: filter 0.2s ease-in-out;
 }
 
-#main-container main {
+#main-container article {
     width: 100%;
     min-width: 500px;
-    padding-left: 25px;
+    padding: 0 25px 0 25px;
 }
 
 h1:hover span a,
@@ -92,7 +139,7 @@ h3:hover span a,
 h4:hover span a,
 h5:hover span a,
 h6:hover span a {
-    color: red;
+    color: var(--red);
 }
 
 h1 span a,
@@ -158,7 +205,7 @@ code {
 }
 
 #navigation-list a:hover {
-    color: red;
+    color: var(--red);
 }
 
 .index-entry,
@@ -316,53 +363,125 @@ details>summary::-webkit-details-marker {
 }
 
 .right-section {
-  min-width: 300px;
-  height: 90vh;
-  padding: 1em;
-  padding-left: 2em;
-  overflow-y: scroll;
-  font-size: 0.8em;
-  color: #424242;
-  position: sticky;
-  top: 20px;
+    min-width: 300px;
+    height: 90vh;
+    padding: 1em;
+    padding-left: 2em;
+    overflow-y: scroll;
+    font-size: 0.8em;
+    color: #424242;
+    position: sticky;
+    top: 20px;
 }
-.right-section nav a{
+
+.right-section nav a {
     color: inherit;
     text-decoration: none;
 }
-.right-section nav a:hover{
-    color: red;
+
+.right-section nav a:hover {
+    color: var(--red);
 }
+
 .right-section nav ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 .right-section nav ul li {
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 0.5em;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.5em;
 }
 
 .right-section nav ul ul {
-  padding-left: 1em;
-  border-left: #E3E7EC solid 1px;
+    padding-left: 1em;
+    border-left: #E3E7EC solid 1px;
 }
 
 .right-section nav ul ul li {
-  padding: 1em 0 0 0;
-  margin-bottom: 0.25em;
+    padding: 1em 0 0 0;
+    margin-bottom: 0.25em;
 }
 
 .right-side-bar-class {
     text-transform: capitalize;
 }
+
 .right-side-bar-class * {
     text-transform: none;
 }
+
 .right-side-bar-section {
     text-transform: capitalize;
-} 
+}
+
+.method-name {
+    margin: 0;
+    color: black;
+    font-weight: 400;
+}
+
+.method-entry {
+    background-color: #F6F6F9;
+    border-radius: 5px;
+    margin: 25px 0 25px 0;
+    color: #4E5260;
+}
+
+.method-info {
+    padding: 10px;
+}
+
+.method-source {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: white;
+}
+
+hr {
+    border: 1px solid #E3E7EC;
+    margin-top: 15px;
+}
+
+.description {
+    color: #4E5260;
+}
+
+.attribute-type {
+    color: #656C78;
+}
+
+.show-source {
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    padding: 8px;
+    background-color: #F6F6F9;
+}
+
+.section-title {
+    color: #47484A;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.show-source:hover {
+    background-color: #DFDFE8;
+}
+
+.method-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
 /* Code blocks syntax highlighting */
 .ruby-constant {
     color: #4b82e9;

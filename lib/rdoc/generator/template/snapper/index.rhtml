@@ -1,13 +1,14 @@
 <div id="main-container">
   <%= render "_sidebar.rhtml" %>
 
-  <main>
+  <article>
     <%- if @options.main_page && main_page = @files.find { |f| f.full_name == @options.main_page } %>
       <%= main_page.description %>
     <%- else -%>
       <p>This is the API documentation for <%= h @title %>.
     <%- end -%>
-  </main>
+  </article>
+
   <%= render "_sidebar_table_of_contents.rhtml" %>
 </div>
 

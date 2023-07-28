@@ -147,7 +147,16 @@ module RDoc
       def copy_internal_static_files
         options = { :verbose => $DEBUG_RDOC, :noop => @dry_run }
 
-        ["fonts/Inter-Regular.ttf", "css/snapper.css", "js/snapper.js"].each do |item|
+        [
+          "fonts/Inter-Black.ttf",
+          "fonts/Inter-Bold.ttf",
+          "fonts/Inter-ExtraBold.ttf",
+          "fonts/Inter-ExtraLight.ttf",
+          "fonts/Inter-Light.ttf",
+          "fonts/Inter-Regular.ttf",
+          "css/snapper.css",
+          "js/snapper.js"
+        ].each do |item|
           destination = "./#{item}"
           FileUtils.mkdir_p(File.dirname(destination), **options)
           FileUtils.cp(@template_dir + item, destination, **options)
