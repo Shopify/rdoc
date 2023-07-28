@@ -188,6 +188,14 @@ details[open]>summary:after {
     bottom: 8px;
 }
 
+.link-list summary::after {
+    bottom: 10px;
+}
+
+.link-list details[open]>summary:after {
+    bottom: 12px;
+}
+
 details>summary {
     list-style: none;
 }
