@@ -182,6 +182,10 @@ module RDoc
 
       # Generate an index page which lists all the classes which are documented
       def generate_index
+        if @options.main_page && main_page = @files.find { |f| f.full_name == @options.main_page }
+          current = main_page
+          file = main_page
+        end
         template_file = @template_dir + "index.rhtml"
         out_file = @base_dir + @options.op_dir + "index.html"
         rel_prefix = @outputdir.relative_path_from(out_file.dirname)
