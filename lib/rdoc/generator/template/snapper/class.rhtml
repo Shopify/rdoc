@@ -6,7 +6,7 @@
     <section class="description"><%= klass.description %></section>
 
     <%- klass.each_section do |section, constants, attributes| -%>
-      <section class="documentation-section">
+      <section id="<%= section.aref %>" class="documentation-section">
         <%- if section.title -%>
           <h2><%= section.title %><span><a href="#top">&uarr; top</a></span></h2>
         <%- end -%>
@@ -21,7 +21,7 @@
 
             <dl>
               <%- constants.each do |const| -%>
-                <dt><%= const.name %>
+                <dt id="<%= const.name %>">><%= const.name %></dt>
                 <dd><%= const.comment ? const.description.strip : "(Not documented)" %></dd>
               <%- end -%>
             </dl>
@@ -34,7 +34,7 @@
 
             <% attributes.each do |attrib| %>
               <div>
-                <h4 class="method-name">
+                <h4 id="<%= attrib.aref %>" class="method-name">
                   <%= h attrib.name %> <span class="attribute-type">(<%= h attrib.definition %>)</span>
                 </h4>
 
@@ -54,7 +54,7 @@
               <h3 class="section-title"><%= visibility.to_s.capitalize %> <%= type.capitalize %> Methods<hr/></h3>
 
               <%- methods.each do |method| -%>
-                <div class="method-entry">
+                <div id="<%= method.aref %>" class="method-entry">
                   <div class="method-info">
                     <h4 class="method-name">
                       <%= h method.name %><%= h method.param_seq %>

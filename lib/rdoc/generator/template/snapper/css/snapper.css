@@ -170,11 +170,11 @@ code {
 }
 
 .title:before {
-  content: "</>";
-  padding: 0 0.5em;
-  font-size: 0.8em;
-  font-weight: normal;
-  color: rgb(175, 190, 195);
+    content: "</>";
+    padding: 0 0.5em;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: rgb(175, 190, 195);
 }
 
 .expandable-index-entry:hover>details>summary,
@@ -292,8 +292,10 @@ article section {
     white-space: nowrap;
 }
 
-#search-results .result-link:hover {
+#search-results .result-link:hover,
+#search-results .result-link:focus {
     background-color: #F6F6F9;
+    outline: none;
 }
 
 #search-results .result-link pre {
