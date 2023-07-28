@@ -3,6 +3,8 @@
 require "erb"
 require "fileutils"
 require "pathname"
+require "json"
+require "zlib"
 require_relative "markup"
 
 module RDoc
@@ -39,8 +41,6 @@ module RDoc
         @methods = @store.all_classes_and_modules.flat_map(&:method_list).sort!
         @files   = @store.all_files.sort
         @grouped_files = group_files
-
-        @json_index = JsonIndex.new(self, options)
       end
 
       # Directory where generated class HTML files live relative to the output dir
@@ -62,15 +62,70 @@ module RDoc
       # information
       def generate
         copy_internal_static_files
+        generate_search_index
         generate_index
         generate_class_files
         generate_file_files
-        @json_index.generate
-        @json_index.generate_gzipped
         copy_static
+        gzip_js_files
       end
 
       private
+
+      def generate_search_index
+        index = {}
+        unique_classes = @classes.uniq
+
+        # Index pages
+        @files.select(&:text?).each do |page|
+          record = page.search_record
+          search_term = record.shift.downcase.strip
+          record.shift
+          index[search_term] = {
+            title: record[0],
+            namespace: record[1],
+            path: record[2],
+            snippet: record[4]
+          }
+        end
+
+        # Index methods
+        unique_classes.flat_map(&:method_list).each do |method|
+          record = method.search_record
+          record.shift
+          search_term = "#{record.shift.downcase.strip}()"
+          index[search_term] = {
+            title: record[0],
+            namespace: record[1],
+            path: record[2],
+            snippet: record[4]
+          }
+        end
+
+        # Index classes
+        unique_classes.select(&:document_self_or_methods).each do |klass|
+          record = klass.search_record
+          record.shift
+          search_term = record.shift.downcase.strip
+          index[search_term] = {
+            title: record[0],
+            namespace: record[1],
+            path: record[2],
+            snippet: record[4]
+          }
+        end
+
+        File.write("./js/search_index.js", "let searchIndex = #{JSON.dump(index)}")
+      end
+
+      def gzip_js_files
+        Dir.glob("./js/*.js").each do |path|
+          Zlib::GzipWriter.open("#{path}.gz") do |gz|
+            gz.write(File.read(path))
+            gz.close
+          end
+        end
+      end
 
       # Generates the nested links for classes and modules in the sidebar
       def create_sidebar_class_entries(klasses, rel_prefix)
