@@ -169,6 +169,14 @@ code {
     white-space: nowrap;
 }
 
+.title:before {
+  content: "</>";
+  padding: 0 0.5em;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: rgb(175, 190, 195);
+}
+
 .expandable-index-entry:hover>details>summary,
 .expandable-index-entry details[open]>summary {
     background-color: #F6F6F9;
