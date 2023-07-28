@@ -234,6 +234,10 @@ details>summary::-webkit-details-marker {
     overflow-x: hidden;
 }
 
+article section {
+    margin-top: calc(var(--space) * 3);
+}
+
 #search-modal-content::-webkit-scrollbar {
     display: none;
 }
