@@ -1,0 +1,15 @@
+<div id="main-container">
+  <%= render "_sidebar.rhtml" %>
+
+  <article>
+    <%- if @options.main_page && main_page = @files.find { |f| f.full_name == @options.main_page } %>
+      <%= main_page.description %>
+    <%- else -%>
+      <p>This is the API documentation for <%= h @title %>.
+    <%- end -%>
+  </article>
+
+  <%= render "_sidebar_table_of_contents.rhtml" %>
+</div>
+
+<%= render "_search_modal.rhtml" %>
