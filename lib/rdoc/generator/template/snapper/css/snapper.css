@@ -111,6 +111,7 @@ code {
 pre {
     padding: calc(var(--space) / 2);
     border: 1px solid #DFDFE8;
+    overflow-x: auto;
 }
 
 code {
