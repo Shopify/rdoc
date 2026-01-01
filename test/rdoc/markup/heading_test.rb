@@ -10,16 +10,18 @@ class RDocMarkupHeadingTest < RDoc::TestCase
   end
 
   def test_aref
-    assert_equal 'label-Hello+Friend-21', @h.aref
+    # GitHub-style: lowercase, spaces to hyphens, remove special chars, no label- prefix
+    assert_equal 'hello-friend', @h.aref
   end
 
   def test_label
-    assert_equal 'label-Hello+Friend-21', @h.label
-    assert_equal 'label-Hello+Friend-21', @h.label(nil)
+    # GitHub-style: lowercase, spaces to hyphens, remove special chars, no label- prefix
+    assert_equal 'hello-friend', @h.label
+    assert_equal 'hello-friend', @h.label(nil)
 
     context = RDoc::NormalClass.new 'Foo'
 
-    assert_equal 'class-Foo-label-Hello+Friend-21', @h.label(context)
+    assert_equal 'class-foo-hello-friend', @h.label(context)
   end
 
   def test_plain_html
