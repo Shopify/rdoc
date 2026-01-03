@@ -39,7 +39,7 @@ class RDocGeneratorMarkupTest < RDoc::TestCase
     @comment = '= Hello'
 
     # When there's no context (self returns nil for aref), there's no context prefix in the legacy label
-    assert_equal "\n<a id=\"label-Hello\" class=\"legacy-anchor\"></a>\n<h1 id=\"hello\"><a href=\"#hello\">Hello</a></h1>\n", description
+    assert_equal "\n<span id=\"label-Hello\" class=\"legacy-anchor\"></span>\n<h1 id=\"hello\"><a href=\"#hello\">Hello</a></h1>\n", description
   end
 
   def test_formatter

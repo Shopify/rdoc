@@ -126,7 +126,8 @@ class RDocGeneratorDarkfishTest < RDoc::TestCase
     )
 
     # GitHub-style: heading-1 (lowercase, dot removed)
-    assert_match(/<a id="class-klass-label-Heading\+1" class="legacy-anchor"><\/a>\s*<h1 id="class-klass-heading-1"><a href="#class-klass-heading-1">Heading 1<\/a>(?!\.)/,
+    # Legacy anchor preserves original casing (class-Klass), while new anchor is lowercase (class-klass)
+    assert_match(/<span id="class-Klass-label-Heading\+1" class="legacy-anchor"><\/span>\s*<h1 id="class-klass-heading-1"><a href="#class-klass-heading-1">Heading 1<\/a>(?!\.)/,
                  klass[%r[<section class=\"description\">.*</section>]m])
     toc = File.binread('table_of_contents.html')
     assert_match(
@@ -173,7 +174,7 @@ class RDocGeneratorDarkfishTest < RDoc::TestCase
 
     assert_include index_html, "<h3>Table of Contents</h3>"
     # GitHub-style: heading-1 (lowercase, space to hyphen)
-    assert_include index_html, '<a id="label-Heading+1" class="legacy-anchor"></a>
+    assert_include index_html, '<span id="label-Heading+1" class="legacy-anchor"></span>
 <h1 id="heading-1"><a href="#heading-1">Heading 1</a>'
     # When there's a main page, the default description should not be shown
     assert_not_include index_html, 'This is the API documentation for My awesome Ruby project.'

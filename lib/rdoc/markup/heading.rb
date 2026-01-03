@@ -125,13 +125,17 @@ module RDoc
       #   "Hello World" -> "label-Hello+World"
       #
       # Examples (with context being class Foo):
-      #   "hello"       -> "class-foo-label-hello"
-      #   "Hello World" -> "class-foo-label-Hello+World"
+      #   "hello"       -> "class-Foo-label-hello"
+      #   "Hello World" -> "class-Foo-label-Hello+World"
       #
       #: (RDoc::Context?) -> String
       def legacy_label(context = nil)
         result = +""
-        result << "#{context.aref}-" if context&.respond_to?(:aref)
+        if context&.respond_to?(:legacy_aref)
+          result << "#{context.legacy_aref}-"
+        elsif context&.respond_to?(:aref)
+          result << "#{context.aref}-"
+        end
         result << legacy_aref
         result
       end

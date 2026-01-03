@@ -317,7 +317,7 @@ class RDoc::Markup::ToHtml < RDoc::Markup::Formatter
     # Add legacy anchor before the heading for backward compatibility.
     # This allows old links with label- prefix to still work.
     if legacy_label && @options.output_decoration && !@options.pipe
-      @res << "\n<a id=\"#{legacy_label}\" class=\"legacy-anchor\"></a>"
+      @res << "\n<span id=\"#{legacy_label}\" class=\"legacy-anchor\"></span>"
     end
 
     @res << if @options.output_decoration
